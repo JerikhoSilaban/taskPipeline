@@ -18,7 +18,7 @@ public class myIO {
                 while(scanner.hasNextLine()) {
                     String line = scanner.nextLine();
 
-                    line = line.replace(". ", "\n");
+                    line = line.replace("| ", "\n");
 
                     printWriter.println(line);
                 }
