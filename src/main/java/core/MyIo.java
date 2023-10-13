@@ -2,26 +2,25 @@ package core;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-public class myIO {
+public class MyIo {
     public void copyIO(@NotNull Path inputPath) throws IOException {
         if (inputPath.toFile().exists()) {
             Path outputPath = Paths.get("/home/jerikho/IdeaProjects/taskPipeline/src/main/resources/output.txt");
 
-            try (Scanner scanner = new Scanner(Files.newBufferedReader(inputPath));
-                 PrintWriter printWriter = new PrintWriter(Files.newBufferedWriter(outputPath))){
+            try (BufferedReader bufferedReader = Files.newBufferedReader(inputPath);
+                 BufferedWriter bufferedWriter = Files.newBufferedWriter(outputPath);
+                 Scanner scanner = new Scanner(bufferedReader);
+                 PrintWriter printWriter = new PrintWriter(bufferedWriter)) {
 
                 while(scanner.hasNextLine()) {
                     String line = scanner.nextLine();
-
-                    line = line.replace("| ", "\n");
-
+                    line = line.replace("/ ", "\n");
                     printWriter.println(line);
                 }
             } catch (IOException e) {
